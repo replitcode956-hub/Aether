@@ -13,6 +13,16 @@
       "architecture": "x64"
     },
     {
+      "name": "ninja-base",
+      "hidden": true,
+      "generator": "Ninja",
+      "condition": {
+        "type": "notEquals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
       "name": "debug",
       "displayName": "aether Debug (console)",
       "description": "Debug build with console and diagnostics",
@@ -20,10 +30,28 @@
       "binaryDir": "${sourceDir}/build/debug"
     },
     {
+      "name": "debug-ninja",
+      "displayName": "aether Debug — Ninja (run from x64 Native Tools Command Prompt)",
+      "inherits": "ninja-base",
+      "binaryDir": "${sourceDir}/build/debug"
+    },
+    {
       "name": "release",
       "displayName": "aether Release (clean)",
       "description": "Optimized release build without the console module",
       "inherits": "msvc-base",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "AETHER_PERF_LOG": "OFF",
+        "AETHER_WINDOWED_PROFILE": "OFF",
+        "AETHER_WINDOWED_SESSION": "OFF",
+        "AETHER_OUTPUT_NAME": "aether"
+      }
+    },
+    {
+      "name": "release-ninja",
+      "displayName": "aether Release — Ninja (run from x64 Native Tools Command Prompt)",
+      "inherits": "ninja-base",
       "binaryDir": "${sourceDir}/build/release",
       "cacheVariables": {
         "AETHER_PERF_LOG": "OFF",
@@ -41,6 +69,16 @@
         "AETHER_PERF_LOG": "ON",
         "AETHER_OUTPUT_NAME": "aether-profile"
       }
+    },
+    {
+      "name": "profile-ninja",
+      "displayName": "aether CPU profiling — Ninja",
+      "inherits": "release-ninja",
+      "binaryDir": "${sourceDir}/build/profile",
+      "cacheVariables": {
+        "AETHER_PERF_LOG": "ON",
+        "AETHER_OUTPUT_NAME": "aether-profile"
+      }
     }
   ],
   "buildPresets": [
@@ -51,15 +89,29 @@
       "configuration": "Debug"
     },
     {
+      "name": "debug-ninja",
+      "displayName": "Build aether Debug (Ninja)",
+      "configurePreset": "debug-ninja"
+    },
+    {
       "name": "release",
       "displayName": "Build aether Release",
       "configurePreset": "release",
       "configuration": "Release"
     },
     {
+      "name": "release-ninja",
+      "displayName": "Build aether Release (Ninja)",
+      "configurePreset": "release-ninja"
+    },
+    {
       "name": "profile",
       "configurePreset": "profile",
       "configuration": "Release"
+    },
+    {
+      "name": "profile-ninja",
+      "configurePreset": "profile-ninja"
     }
   ]
 }

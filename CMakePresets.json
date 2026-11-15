@@ -15,12 +15,7 @@
     {
       "name": "ninja-base",
       "hidden": true,
-      "generator": "Ninja",
-      "condition": {
-        "type": "notEquals",
-        "lhs": "${hostSystemName}",
-        "rhs": "Linux"
-      }
+      "generator": "NMake Makefiles"
     },
     {
       "name": "debug",

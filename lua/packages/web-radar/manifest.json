@@ -1,0 +1,9 @@
+{
+  "id": "aether_web_radar",
+  "name": "Aether Web Radar",
+  "version": "1.0.0",
+  "author": "Aether",
+  "description": "Opt-in private web radar with a local server and temporary tunnel",
+  "api_version": 1,
+  "entry": "main.lua"
+}

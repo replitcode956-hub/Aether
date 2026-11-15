@@ -1,0 +1,65 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "msvc-base",
+      "hidden": true,
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64"
+    },
+    {
+      "name": "debug",
+      "displayName": "aether Debug (console)",
+      "description": "Debug build with console and diagnostics",
+      "inherits": "msvc-base",
+      "binaryDir": "${sourceDir}/build/debug"
+    },
+    {
+      "name": "release",
+      "displayName": "aether Release (clean)",
+      "description": "Optimized release build without the console module",
+      "inherits": "msvc-base",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "AETHER_PERF_LOG": "OFF",
+        "AETHER_WINDOWED_PROFILE": "OFF",
+        "AETHER_WINDOWED_SESSION": "OFF",
+        "AETHER_OUTPUT_NAME": "aether"
+      }
+    },
+    {
+      "name": "profile",
+      "displayName": "aether optimized CPU profiling",
+      "inherits": "release",
+      "binaryDir": "${sourceDir}/build/profile",
+      "cacheVariables": {
+        "AETHER_PERF_LOG": "ON",
+        "AETHER_OUTPUT_NAME": "aether-profile"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "debug",
+      "displayName": "Build aether Debug",
+      "configurePreset": "debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "release",
+      "displayName": "Build aether Release",
+      "configurePreset": "release",
+      "configuration": "Release"
+    },
+    {
+      "name": "profile",
+      "configurePreset": "profile",
+      "configuration": "Release"
+    }
+  ]
+}
